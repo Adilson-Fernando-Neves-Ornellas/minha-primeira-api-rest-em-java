@@ -1,11 +1,11 @@
 package com.serratec.primeiraapi.service.Produto;
 
-import java.util.InputMismatchException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.serratec.primeiraapi.error.exeptions.ResouceNotFoundExeption;
 import com.serratec.primeiraapi.model.Produto.ProdutosModel;
 import com.serratec.primeiraapi.repository.Produto.ProdutosRepository;
 
@@ -22,7 +22,7 @@ public class ProdutosService {
     public ProdutosModel obter(Long id){
         ProdutosModel produto = produtosRepositoryAction.obter(id);
         if(produto==null){
-            throw new InputMismatchException(id + " do produto não encontrado");
+            throw new ResouceNotFoundExeption(id + " do produto não encontrado");
         }
         return produto;
     }
@@ -35,7 +35,7 @@ public class ProdutosService {
 
         ProdutosModel produtoEncontrado = produtosRepositoryAction.obter(id);
         if(produtoEncontrado == null){
-            throw new InputMismatchException("Erro ao tentar atualizar: "+ id + " do produto não encontrado");
+            throw new ResouceNotFoundExeption("Erro ao tentar atualizar: "+ id + " do produto não encontrado");
         }
         produto.setIdProduto(id);
         return produtosRepositoryAction.atualizar(produto);

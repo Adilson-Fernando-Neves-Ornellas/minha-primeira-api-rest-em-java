@@ -1,11 +1,12 @@
 package com.serratec.primeiraapi.service.FormaPagamento;
 
-import java.util.InputMismatchException;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.serratec.primeiraapi.error.exeptions.ResouceNotFoundExeption;
 import com.serratec.primeiraapi.model.FormaPagamento.FormaPagamentoModel;
 import com.serratec.primeiraapi.repository.FormaPagamento.FormaPagamentoRepository;
 
@@ -22,7 +23,7 @@ public class FormaPagamentoService {
     public FormaPagamentoModel obter(Long id){
         FormaPagamentoModel formaPagamento = formaPagamentoRepositoryAction.obter(id);
         if(formaPagamento==null){
-            throw new InputMismatchException(id + " da formaPagamento não encontrado");
+            throw new ResouceNotFoundExeption(id + " da formaPagamento não encontrado");
         }
         return formaPagamento;
     }
@@ -35,7 +36,7 @@ public class FormaPagamentoService {
 
         FormaPagamentoModel formaPagamentoEncontrado = formaPagamentoRepositoryAction.obter(id);
         if(formaPagamentoEncontrado == null){
-            throw new InputMismatchException("Erro ao tentar atualizar: "+ id + " da formaPagamento não encontrado");
+            throw new ResouceNotFoundExeption("Erro ao tentar atualizar: "+ id + " da formaPagamento não encontrado");
         }
         formaPagamento.setIdFormaPagamento(id);
         return formaPagamentoRepositoryAction.atualizar(formaPagamento);

@@ -1,11 +1,12 @@
 package com.serratec.primeiraapi.service.Cliente;
 
-import java.util.InputMismatchException;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.serratec.primeiraapi.error.exeptions.ResouceNotFoundExeption;
 import com.serratec.primeiraapi.model.Cliente.ClienteModel;
 import com.serratec.primeiraapi.repository.Cliente.ClienteRepository;
 
@@ -22,7 +23,7 @@ public class ClienteService {
     public ClienteModel obter(Long id){
         ClienteModel cliente = clienteRepositoryAction.obter(id);
         if(cliente==null){
-            throw new InputMismatchException(id + " do cliente não encontrado");
+            throw new ResouceNotFoundExeption(id + " do cliente não encontrado");
         }
         return cliente;
     }
@@ -35,7 +36,7 @@ public class ClienteService {
 
         ClienteModel clienteEncontrado = clienteRepositoryAction.obter(id);
         if(clienteEncontrado == null){
-            throw new InputMismatchException("Erro ao tentar atualizar: "+ id + " do cliente não encontrado");
+            throw new ResouceNotFoundExeption("Erro ao tentar atualizar: "+ id + " do cliente não encontrado");
         }
         cliente.setIdCliente(id);
         return clienteRepositoryAction.atualizar(cliente);

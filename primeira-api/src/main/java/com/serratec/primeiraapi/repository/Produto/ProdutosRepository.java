@@ -43,9 +43,9 @@ public class ProdutosRepository {
 
     public ProdutosModel atualizar (ProdutosModel produto){
 
-       listaProdutos.removeIf(p -> p.getIdProduto() == produto.getIdProduto());
+        listaProdutos.removeIf(p -> p.getIdProduto() == produto.getIdProduto());
 
-      listaProdutos.add(produto);
+        listaProdutos.add(produto);
 
         
         return produto; 
